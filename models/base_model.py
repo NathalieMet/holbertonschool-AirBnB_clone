@@ -25,7 +25,6 @@ class BaseModel:
     def save(self):
         """update the time of the last instance"""
         self.updated_at = datetime.now()
-        self.updated_at.isoformat()
 
     def to_dict(self):
         """do a copy of dictionnary"""
