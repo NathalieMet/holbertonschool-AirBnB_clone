@@ -15,8 +15,10 @@ class FileStorage:
         obj = self.__class__.__name__.id
 
     def save(self):
-        self.__objects.dump
+        with open (self.__file_path, 'w', encoding='UTF-8') as file:
+            json.dump(self.__objects, file)
 
     def reload(self):
-
-
+        if self.__file_path:
+            with open (self.__file_path, 'r', encoding='UTF-8') as file:
+                loaded_data = json.load(file)
