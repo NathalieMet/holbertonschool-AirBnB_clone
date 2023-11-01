@@ -34,6 +34,7 @@ class FileStorage:
                 except Exception:
                     pass
 
+
 models = {
-    "BaseModel": BaseModel,
+    "BaseModel": BaseModel
 }
