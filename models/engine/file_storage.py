@@ -1,24 +1,39 @@
 #!/bin/python3
 """save in storage"""
 import json
+import os
 
 
 class FileStorage:
-    def __init__(self):
-        self.__file_path = 'models/file.json'
-        self.__objects = []
+    __file_path = 'file.json'
+    __objects = {}
 
     def all(self):
         return self.__objects
 
     def new(self, obj):
-        obj = self.__class__.__name__.id
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
+        serialized = {}
+        for key, value in self.__objects.items():
+            serialized[key] = value.to_dict()
         with open (self.__file_path, 'w', encoding='UTF-8') as file:
-            json.dump(self.__objects, file)
+            json.dump(serialized, file)
 
     def reload(self):
-        if self.__file_path:
+        if os.path.exists(self.__file_path):
             with open (self.__file_path, 'r', encoding='UTF-8') as file:
-                loaded_data = json.load(file)
+                try:
+                    data = json.load(file)
+                    for key, value in data.items():
+                        class_name, obj_id = key.split(".")
+                        cls = models[class_name]
+                        self.__objects[key] = cls(**value)
+                except Exception:
+                    pass
+
+models = {
+    "BaseModel": BaseModel,
+}

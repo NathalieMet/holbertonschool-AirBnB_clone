@@ -2,6 +2,7 @@
 """Python console"""
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -16,6 +17,8 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key in attributes:
                     setattr(self, key, value)
+        if not kwargs:
+            storage.new(self)
 
     def __str__(self):
         """print instances"""
@@ -25,6 +28,7 @@ class BaseModel:
     def save(self):
         """update the time of the last instance"""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """do a copy of dictionnary"""
