@@ -29,8 +29,7 @@ class BaseModel:
         else:
             self.updated_at = self.created_at = datetime.now()
             self.id = str(uuid.uuid4())
-
-        storage.new(self)
+            storage.new(self)
 
     def __str__(self):
         """Returns a string representation of the instance.
