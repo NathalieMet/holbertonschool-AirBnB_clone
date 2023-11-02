@@ -6,9 +6,19 @@ from models import storage
 
 
 class BaseModel:
-    """class Basemodel"""
+    """Base class for managing data objects"""
     def __init__(self, *args, **kwargs):
-        """initialize instance"""
+        """Initialize an instance of BaseModel.
+
+        Args:
+            kwargs (dict): A dictionary containing the instance's attributes.
+
+        Attributes:
+            id (str): Unique identifier generated for the instance.
+            created_at (datetime): Date and time of instance creation.
+            updated_at (datetime): Date and time of
+            the last update to the instance.
+        """
         attributes = ["id", "created_at", "updated_at"]
         self.updated_at = datetime.now()
         self.id = str(uuid.uuid4())
@@ -16,26 +26,40 @@ class BaseModel:
         if kwargs is not None:
             for key, value in kwargs.items():
                 if key in attributes:
-                    setattr(self, key, value)
+                    if key in ["created_at", "updated_at"]:
+                        setattr(self, key, datetime.
+                                strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+                        self.updated_at = datetime.now()
+                    else:
+                        setattr(self, key, value)
+
         if not kwargs:
             storage.new(self)
 
     def __str__(self):
-        """print instances"""
+        """Returns a string representation of the instance.
+
+        Returns:
+            str: A string containing information about the instance.
+        """
         return ("[{}] ({}) {}"
                 .format(self.__class__.__name__, self.id, self.__dict__))
 
     def save(self):
-        """update the time of the last instance"""
+        """Updates the time of the last modification
+        of the instance and saves the data."""
+
         self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
-        """do a copy of dictionnary"""
+        """Returns a copy of the instance data in dictionary format.
+
+        Returns:
+            dict: A dictionary containing the instance's data.
+        """
         obj_dict = self.__dict__.copy()
         obj_dict['__class__'] = self.__class__.__name__
-        obj_dict['created_at'] = self.created_at.\
-            strftime('%Y-%m-%dT%H:%M:%S.%f')
-        obj_dict['updated_at'] = self.updated_at.\
-            strftime('%Y-%m-%dT%H:%M:%S.%f')
+        obj_dict['created_at'] = self.created_at.isoformat()
+        obj_dict['updated_at'] = self.updated_at.isoformat()
         return obj_dict
