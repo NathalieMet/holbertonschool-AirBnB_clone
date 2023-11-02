@@ -1,6 +1,8 @@
 #!/bin/python3
 """Python console"""
 import cmd
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -17,6 +19,16 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         print(end='')
+
+    def do_create(self):
+        if not BaseModel.__class__.__name__:
+            print("** Class name missing **")
+        else:
+            try:
+                FileStorage.new = type(class_name, (object,), {})
+                print(f"Created a new class named {class_name}")
+            except NameError:
+                print(f"** Class '{class_name}' doesn't exist **")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
