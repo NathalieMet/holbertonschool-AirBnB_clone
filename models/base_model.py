@@ -46,8 +46,8 @@ class BaseModel:
         of the instance and saves the data."""
 
         self.updated_at = datetime.now()
-        storage.new(self)
         storage.save()
+        storage.new(self)
 
     def to_dict(self):
         """Returns a copy of the instance data in dictionary format.

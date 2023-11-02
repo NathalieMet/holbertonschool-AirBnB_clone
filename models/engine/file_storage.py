@@ -33,18 +33,18 @@ class FileStorage():
 
     def save(self):
         """Save the data objects to the JSON data file."""
+        dicto_to_save = {}
         for key, value in self.__objects.items():
-            self.__objects[key] = value.to_dict()
+            dicto_to_save[key] = value.to_dict()
         with open(self.__file_path, 'w', encoding='UTF-8') as file:
-            json.dump(self.__objects, file)
+            json.dump(dicto_to_save, file)
 
     def reload(self):
         """Reload data objects from the JSON data file."""
         from models.base_model import BaseModel
         try:
             with open(self.__file_path, 'r', encoding='UTF-8') as file:
-                obj_dict = json.load(file)
-                for key, value in obj_dict.items():
+                for key, value in json.load(file).items():
                     self.__objects[key] = eval(value["__class__"])(**value)
-        except Exception:
+        except FileNotFoundError:
             pass
