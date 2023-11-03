@@ -16,12 +16,13 @@ class HBNBCommand(cmd.Cmd):
     """ hbnb command interpreter """
     prompt = "(hbnb)"
     __all_class = {
+        "Place": Place,
+        "BaseModel": BaseModel,
         "User": User,
         "State": State,
         "City": City,
         "Review": Review,
         "Amenity": Amenity,
-        "Place": Place
     }
 
     def do_quit(self, arg):
