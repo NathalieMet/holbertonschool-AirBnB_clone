@@ -15,7 +15,7 @@ from models.place import Place
 class HBNBCommand(cmd.Cmd):
     """ hbnb command interpreter """
     prompt = "(hbnb)"
-    all_class = {
+    __all_class = {
         "User": User,
         "State": State,
         "City": City,
@@ -42,8 +42,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args.strip()
-        if class_name in self.all_class:
-            new_instance = self.all_class[class_name]()
+        if class_name in self.__all_class:
+            new_instance = self.__all_class[class_name]()
             new_instance.save()
             print(new_instance.id)
         else:
@@ -63,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
 
         class_name = args[0]
         id_model = args[1]
-        if class_name in self.all_class:
+        if class_name in self.__all_class:
             instance_key = "{}.{}".format(class_name, id_model)
             if instance_key in storage.all():
                 instance = storage.all()[instance_key]
@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
 
         id_model = args[1]
 
-        if class_name in self.all_class:
+        if class_name in self.__all_class:
             instance_key = "{}.{}".format(class_name, id_model)
             if instance_key in storage.all():
                 del storage.all()[instance_key]
@@ -110,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             args = args.split()
             class_name = args[0]
-            if class_name in self.all_class:
+            if class_name in self.__all_class:
                 for instance in storage.all().values():
                     if instance.__class__.__name__ == class_name:
                         list_instance.append(instance.__str__())
@@ -134,7 +134,7 @@ class HBNBCommand(cmd.Cmd):
 
         instance_id = arguments[1]
 
-        if class_name in self.all_class:
+        if class_name in self.__all_class:
             instance_key = "{}.{}".format(class_name, instance_id)
             if instance_key in storage.all():
                 if len(arguments) < 3:
