@@ -11,46 +11,41 @@ AirBnB Console is a command-line interface (CLI) that allows you to interact in 
 ## How to Get Started
 
 1. Clone the repository from GitHub:
+``` bash
 git clone git@github.com:NathalieMet/holbertonschool-AirBnB_clone.git
-
+```
 2. Navigate to the project directory:
+``` bash
 cd holbertonschool-AirBnB_clone
-
+```
 3. Run the command interpreter:
+``` bash
 ./console.py
+```
 The command interpreter should now be ready for use.
 
 ## How to Use the Command Interpreter
 The command interpreter supports various commands and options. Here are some examples of commonly used commands:
 
 Create a new instance of a class:
-
-Usage: create <class name>
-
-Exemple: create User
+- Usage: create <class name>
+- Exemple: create User
 
 Show the representation of an instance based on the class name and id:
-
-Usage: show <class name> <instance ID>
-
-Exemple: show BaseModel 1234-1234-1234
+- Usage: show <class name> <instance ID>
+- Exemple: show BaseModel 1234-1234-1234
 
 Destroy an instance based on the class name and id:
-
-Usage: destroy <class name> <instance ID>
-
-Exemple: destroy Review 1234-1234-1234
+- Usage: destroy <class name> <instance ID>
+- Exemple: destroy Review 1234-1234-1234
 
 Print all string representation of all instances based or not on the class name:
-Usage: all [<class name>]
-Exemples: all State
-		  all
+- Usage: all [<class name>]
+- Exemples: all State / all
 
 Update an instance based on the class name and id by adding or updating attribute:
-
-Usage: update <class name> <instance ID> <attribute name> "<attribute value>"
-
-Exemple: update Amenity 1234-1234-1234 name "new_name"
+- Usage: update <class name> <instance ID> <attribute name> "<attribute value>"
+- Exemple: update Amenity 1234-1234-1234 name "new_name"
 
 After starting the console, you can enter commands as described in the section above. Use the commands to create, show, destroy, list, and update instances of various classes.
 
