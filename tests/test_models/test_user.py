@@ -51,6 +51,24 @@ class test_user(unittest.TestCase):
         }
         self.assertDictEqual(dict, self.user.to_dict())
 
+    def test_instance_creation(self):
+        obj = User()
+        self.assertIsInstance(obj, User)
+
+    def test_str_representation(self):
+        obj = User()
+        obj_str = str(obj)
+        self.assertTrue("[User]" in obj_str)
+        self.assertTrue(obj.id in obj_str)
+
+    def test_to_dict_method(self):
+        obj = User()
+        obj_dict = obj.to_dict()
+        self.assertIsInstance(obj_dict, dict)
+        self.assertEqual(obj_dict['__class__'], 'User')
+        self.assertTrue('created_at' in obj_dict)
+        self.assertTrue('updated_at' in obj_dict)
+
 
 if __name__ == "__main__":
     unittest.main()

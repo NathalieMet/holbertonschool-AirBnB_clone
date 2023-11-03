@@ -51,6 +51,24 @@ class test_amenity(unittest.TestCase):
         }
         self.assertDictEqual(dict, self.amenity.to_dict())
 
+    def test_instance_creation(self):
+        obj = Amenity()
+        self.assertIsInstance(obj, Amenity)
+
+    def test_str_representation(self):
+        obj = Amenity()
+        obj_str = str(obj)
+        self.assertTrue("[Amenity]" in obj_str)
+        self.assertTrue(obj.id in obj_str)
+
+    def test_to_dict_method(self):
+        obj = Amenity()
+        obj_dict = obj.to_dict()
+        self.assertIsInstance(obj_dict, dict)
+        self.assertEqual(obj_dict['__class__'], 'Amenity')
+        self.assertTrue('created_at' in obj_dict)
+        self.assertTrue('updated_at' in obj_dict)
+
 
 if __name__ == "__main__":
     unittest.main()

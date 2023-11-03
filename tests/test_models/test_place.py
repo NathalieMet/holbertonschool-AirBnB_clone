@@ -51,6 +51,23 @@ class test_place(unittest.TestCase):
         }
         self.assertDictEqual(dict, self.place.to_dict())
 
+    def test_instance_creation(self):
+        obj = Place()
+        self.assertIsInstance(obj, Place)
+
+    def test_str_representation(self):
+        obj = Place()
+        obj_str = str(obj)
+        self.assertTrue("[Place]" in obj_str)
+        self.assertTrue(obj.id in obj_str)
+
+    def test_to_dict_method(self):
+        obj = Place()
+        obj_dict = obj.to_dict()
+        self.assertIsInstance(obj_dict, dict)
+        self.assertEqual(obj_dict['__class__'], 'Place')
+        self.assertTrue('created_at' in obj_dict)
+        self.assertTrue('updated_at' in obj_dict)
 
 if __name__ == "__main__":
     unittest.main()
