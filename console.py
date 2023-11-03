@@ -3,11 +3,26 @@
 import cmd
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
+from models.state import State
+from models.city import City
+from models.review import Review
+from models.amenity import Amenity
+from models.place import Place
+
 
 
 class HBNBCommand(cmd.Cmd):
     """ hbnb command interpreter """
     prompt = "(hbnb)"
+    all_class = {
+        "User": User,
+        "State": State,
+        "City": City,
+        "Review": Review,
+        "Amenity": Amenity,
+        "Place": Place
+    }
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -27,8 +42,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args.strip()
-        if class_name == "BaseModel":
-            new_instance = BaseModel(class_name)
+        if class_name in self.all_class:
+            new_instance = self.all_class[class_name]()
             new_instance.save()
             print(new_instance.id)
         else:
@@ -48,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
 
         class_name = args[0]
         id_model = args[1]
-        if class_name == "BaseModel":
+        if class_name in self.all_class:
             instance_key = "{}.{}".format(class_name, id_model)
             if instance_key in storage.all():
                 instance = storage.all()[instance_key]
@@ -74,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
 
         id_model = args[1]
 
-        if class_name == "BaseModel":
+        if class_name in self.all_class:
             instance_key = "{}.{}".format(class_name, id_model)
             if instance_key in storage.all():
                 del storage.all()[instance_key]
@@ -95,9 +110,10 @@ class HBNBCommand(cmd.Cmd):
         else:
             args = args.split()
             class_name = args[0]
-            if class_name == "BaseModel":
+            if class_name in self.all_class:
                 for instance in storage.all().values():
-                    list_instance.append(instance.__str__())
+                    if instance.__class__.__name__ == class_name:
+                        list_instance.append(instance.__str__())
                 print(list_instance)
             else:
                 print("** class doesn't exist **")
@@ -118,7 +134,7 @@ class HBNBCommand(cmd.Cmd):
 
         instance_id = arguments[1]
 
-        if class_name == "BaseModel":
+        if class_name in self.all_class:
             instance_key = "{}.{}".format(class_name, instance_id)
             if instance_key in storage.all():
                 if len(arguments) < 3:
@@ -129,7 +145,8 @@ class HBNBCommand(cmd.Cmd):
                 if len(arguments) < 4:
                     print("** value missing **")
                     return
-            
+                
+                
                 if len(arguments) >= 4:
                     attribute_value = arguments[3]
                     instance = storage.all()[instance_key]
