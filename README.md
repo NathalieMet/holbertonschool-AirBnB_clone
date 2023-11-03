@@ -52,4 +52,5 @@ After starting the console, you can enter commands as described in the section a
 ## Authors
 - Cremey Erwan
 - Metreau Nathalie
+
 For a full list of contributors, please refer to the AUTHORS file.
