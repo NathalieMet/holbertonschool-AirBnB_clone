@@ -42,6 +42,12 @@ class FileStorage():
     def reload(self):
         """Reload data objects from the JSON data file."""
         from models.base_model import BaseModel
+        from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
         try:
             with open(self.__file_path, 'r', encoding='UTF-8') as file:
                 for key, value in json.load(file).items():
