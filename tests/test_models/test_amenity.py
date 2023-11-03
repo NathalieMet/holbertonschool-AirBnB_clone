@@ -4,6 +4,8 @@ import unittest
 import os
 from models.amenity import Amenity
 from datetime import datetime
+from models.base_model import BaseModel
+from models import storage
 
 
 class test_amenity(unittest.TestCase):
@@ -68,6 +70,28 @@ class test_amenity(unittest.TestCase):
         self.assertEqual(obj_dict['__class__'], 'Amenity')
         self.assertTrue('created_at' in obj_dict)
         self.assertTrue('updated_at' in obj_dict)
+
+# test Nadege et solomon
+
+    def test_amenity_attributes(self):
+        amenity = Amenity()
+        self.assertEqual(amenity.name, "")
+
+    def test_amenity_in_storage(self):
+        amenity = Amenity()
+        storage.save()
+        key = "Amenity.{}".format(amenity.id)
+        self.assertEqual(key in storage.all(), True)
+
+    def test_amenity_set_and_get_name(self):
+        amenity = Amenity()
+        amenity.name = "shop"
+        self.assertEqual(amenity.name, "shop")
+        amenity.name = "park"
+        self.assertEqual(amenity.name, "park")
+
+    def test_amenity_inherits_from(self):
+        self.assertTrue(issubclass(Amenity, BaseModel))
 
 
 if __name__ == "__main__":

@@ -4,6 +4,8 @@ import unittest
 import os
 from models.city import City
 from datetime import datetime
+from models.base_model import BaseModel
+from models import storage
 
 
 class test_city(unittest.TestCase):
@@ -68,6 +70,29 @@ class test_city(unittest.TestCase):
         self.assertEqual(obj_dict['__class__'], 'City')
         self.assertTrue('created_at' in obj_dict)
         self.assertTrue('updated_at' in obj_dict)
+
+        """test nadege&solomon"""
+
+    def test_city_attributes(self):
+        city = City()
+        self.assertEqual(city.state_id, "")
+        self.assertEqual(city.name, "")
+
+    def test_city_in_storage(self):
+        city = City()
+        storage.save()
+        key = "City.{}".format(city.id)
+        self.assertEqual(key in storage.all(), True)
+
+    def test_city_set_and_get_name(self):
+        city = City()
+        city.name = "laval"
+        self.assertEqual(city.name, "laval")
+        city.name = "paris"
+        self.assertEqual(city.name, "paris")
+
+    def test_city_inherits_from(self):
+        self.assertTrue(issubclass(City, BaseModel))
 
 
 if __name__ == "__main__":
