@@ -93,19 +93,5 @@ class test_amenity(unittest.TestCase):
     def test_amenity_inherits_from(self):
         self.assertTrue(issubclass(Amenity, BaseModel))
 
-        """Nath tests"""
-
-    def __init__(self, *args, **kwargs):
-        """ """
-        super().__init__(*args, **kwargs)
-        self.name = "Amenity"
-        self.value = Amenity
-
-    def test_name2(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.name), str)
-
-
 if __name__ == "__main__":
     unittest.main()
