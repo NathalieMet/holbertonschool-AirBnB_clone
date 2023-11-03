@@ -11,9 +11,9 @@ from models.amenity import Amenity
 from models.place import Place
 
 
-
 class HBNBCommand(cmd.Cmd):
     """ hbnb command interpreter """
+
     prompt = "(hbnb)"
     __all_class = {
         "Place": Place,
@@ -120,7 +120,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_update(self, args):
-        """Updates an instance's attribute based on class name, id, attribute name, and attribute value."""
+        """Updates an instance's attribute based on class name,
+        id, attribute name, and attribute value."""
         arguments = args.split()
 
         if not arguments:
@@ -146,8 +147,7 @@ class HBNBCommand(cmd.Cmd):
                 if len(arguments) < 4:
                     print("** value missing **")
                     return
-                
-                
+
                 if len(arguments) >= 4:
                     attribute_value = arguments[3]
                     instance = storage.all()[instance_key]
@@ -158,5 +158,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
+    
