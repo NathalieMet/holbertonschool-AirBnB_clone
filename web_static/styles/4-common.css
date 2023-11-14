@@ -22,8 +22,8 @@ body {
 	width: 20%;
 	border: none;
 	border-radius: 4px;
-	margin-left: auto; /* Aligner à droite */
-	margin-right: 30px; /* Espacement de 30px de la droite */
+	margin-left: auto;
+	margin-right: 30px;
 }
 
 .filters button:hover {
