@@ -36,7 +36,6 @@ article h2 {
 	min-width: 60px;
 	font-size: 30px;
 	text-align: center;
-	vertical-align: middle;
 	width: 16%;
 	height: 60px;
 	line-height: 60px;
@@ -49,13 +48,14 @@ article h2 {
 	border: none;
 	justify-content: flex-end;
 	gap:70px;
-
+	margin-bottom: 15px;
 }
 
 .information {
 	height: 80px;
 	border-top: solid #DDDDDD 1px;
 	border-bottom: solid #DDDDDD 1px;
+	padding-top: 10px;
 }
 
 .max_guest
@@ -103,5 +103,5 @@ article h2 {
 
 .description {
 	margin: 2px;
-	margin-bottom: 60px;
+	margin-bottom: 10px;
 }
